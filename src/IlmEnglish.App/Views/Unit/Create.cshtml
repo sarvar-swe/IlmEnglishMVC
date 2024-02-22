@@ -1,0 +1,24 @@
+@model CourseBookUnit
+
+<div class="container">
+    <form method="post" asp-action="Create" asp-controller="Unit">
+        <div class="mb-3 row p-1">
+            <label asp-for="@Model.UnitNumber" class="p-0"></label>
+            <input asp-for="@Model.UnitNumber" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="@Model.Name" class="p-0"></label>
+            <input asp-for="@Model.Name" type="text" class="form-control" />
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Add</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Course" asp-action="Index" class="btn btn-secondary border form-control">
+                    Back to List
+                </a>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,33 @@
+@model CourseBook
+
+<div class="container">
+    
+    <form method="post" asp-action="Create" asp-controller="Book">
+        <div class="mb-3 row p-1">
+            <label asp-for="@Model.Name" class="p-0"></label>
+            <input asp-for="@Model.Name" type="text" class="form-control"/>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="@Model.Description" class="p-0"></label>
+            <input asp-for="@Model.Description" type="text" class="form-control"/>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="@Model.CoverPageUrl" class="p-0"></label>
+            <input asp-for="@Model.CoverPageUrl" type="text" class="form-control"/>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="@Model.HardCopyUrl" class="p-0"></label>
+            <input asp-for="@Model.HardCopyUrl" type="text" class="form-control"/>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Add</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Course" asp-action="Index" class="btn btn-secondary border form-control">
+                    Back to List
+                </a>
+            </div>
+        </div>
+    </form>
+</div>

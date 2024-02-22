@@ -1,0 +1,40 @@
+@model List<CourseBookUnitAudio>
+
+
+<div class="row shadow p-3 mb-5 bg-white rounded">
+    <div class="col-sm-6">
+        <div class="card border-0">
+            <div class="card-body">
+                <h5 class="card-title p-2">Audios</h5>
+                @foreach (var audio in Model)
+                {
+                    <div class="d-flex align-items-center p-3">
+                        <h5 style="margin-right: 10px;">@audio.Name</h5>
+                        <audio controls>
+                            <source src="@audio.Url" type="audio/mpeg">
+                        </audio>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card border-0">
+            <div class="card-body">
+                <img src="https://img.freepik.com/premium-vector/cute-boy-studying-computer-listening-music_679557-1056.jpg" alt="" style="width: 300px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('play', function (e) {
+        var audios = document.getElementsByTagName('audio');
+        for (var i = 0, len = audios.length; i < len; i++) {
+            if (audios[i] != e.target) {
+                audios[i].pause();
+            }
+        }
+    }, true);
+</script>

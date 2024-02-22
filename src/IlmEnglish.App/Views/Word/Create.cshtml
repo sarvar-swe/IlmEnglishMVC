@@ -1,0 +1,43 @@
+@model List<CourseBookUnit>
+
+<div class="container">
+    <form method="post" asp-action="Create" asp-controller="Word">
+        <div class="row pt-4 pb-3">
+            <div class="col-6">
+                <select class="form-select" name="unitId" style="width: auto;">
+                    <option value="0">Select unit</option>
+                    @foreach (var unit in Model.OrderBy(u => u.UnitNumber))
+                    {
+                        <option value="@unit.Id">@unit.UnitNumber. @unit.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">English Word</label>
+            <input type="text" name="english" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Uzbek Word</label>
+            <input type="text" name="uzbek" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Russian Word</label>
+            <input type="text" name="russian" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Image Url</label>
+            <input type="text" name="imageUrl" class="form-control" />
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Add</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Course" asp-action="Index" class="btn btn-secondary border form-control">
+                    Back to List
+                </a>
+            </div>
+        </div>
+    </form>
+</div>

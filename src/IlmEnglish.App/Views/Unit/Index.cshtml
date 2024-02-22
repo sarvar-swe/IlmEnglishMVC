@@ -1,0 +1,145 @@
+@model List<CourseBookUnit>
+
+<div class="container">
+    <!-- Sidebar -->
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+        <div class="position-sticky">
+            <h1 class="pl-8 mx-3 mt-4">Units</h1>
+            <div class="list-group list-group-flush mx-3 mt-4" style="padding-bottom: 50px;">
+                @foreach (var unit in Model.OrderBy(u => u.UnitNumber))
+                {
+                    <a href="#" class="unit-link" data-id="@unit.Id" style="text-decoration: none;">
+                        <h5>@unit.UnitNumber. @unit.Name</h5>
+                    </a>
+                    <hr>
+                }
+            </div>
+        </div>
+    </nav>
+
+    <div class="unitContent" id="learning"
+        style="margin-left: 300px; overflow-y: auto; overflow-x: hidden; display: none;">
+        <div id="audioContent">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-center border-0">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary btn-lg vocabulary" id="goToVocabulary">Go to Vocabulary</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-center border-0">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary btn-lg practice" id="goToPractice">Go to Practice</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="wordContent">
+            </div>
+
+            <div id="practiceContent">
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Wait for the document to be ready
+        $(document).ready(function () {
+            // Disable the 'learning' div initially
+            $("#learning").prop('disabled', true);
+
+            // Handle unit click event
+            $(".unit-link").click(function () {
+                // Enable the 'learning' div
+                $("#learning").fadeIn();
+            });
+            // Add click event listener to all anchor tags with class 'unit-link'
+            $('.unit-link').click(function (e) {
+                e.preventDefault(); // Prevent default anchor tag behavior
+
+                // Remove 'active' class from all anchor tags
+                $('.unit-link').removeClass('active');
+
+                // Add 'active' class to the clicked anchor tag
+                $(this).addClass('active');
+
+                var unitId = $(this).data('id'); // Get the unit id from 'data-id' attribute
+                // AJAX call to fetch audio content based on the selected unit id
+                $.ajax({
+                    url: '/Audio/Index/' + unitId, // URL to fetch audio content
+                    type: 'GET',
+                    success: function (data) {
+                        // Update the content div with the fetched audio content
+                        $('#audioContent').html(data);
+                    },
+                    error: function () {
+                        // Handle error if any
+                        console.log('Error occurred while fetching audio content.');
+                    }
+                });
+
+                $.ajax({
+                    url: '/Word/Index/' + unitId, // URL to fetch word content
+                    type: 'GET',
+                    success: function (data) {
+                        // Update the content div with the fetched word content
+                        $('#wordContent').html(data);
+                        console.log(data);
+                    },
+                    error: function () {
+                        // Handle error if any
+                        console.log('Error occurred while fetching audio content.');
+                    }
+                });
+
+                $.ajax({
+                    url: '/Word/Practice/' + unitId,
+                    type: 'GET',
+                    success: function (data)
+                    {
+                        $('#practiceContent').html(data);
+                        console.log(data);
+                    },
+                    error: function () {
+                        console.log('Error occured while loading practice content.');
+                    }
+                });
+            });
+
+            $('#wordContent').hide();
+            $('#practiceContent').hide();
+
+            $('.vocabulary').click(function() {
+                $('#wordContent').show();
+                $('#audioContent').hide();
+                $('#practiceContent').hide();
+                $('.practice').hide();
+                $('.vocabulary').hide();
+            });
+
+            $('.unit-link').click(function() {
+                $('#wordContent').hide();
+                $('#audioContent').show();
+                $('#practiceContent').hide();
+                $('.practice').show();
+                $('.vocabulary').show();
+            });
+
+            $('.practice').click(function() {
+                $('#wordContent').hide();
+                $('#audioContent').hide();
+                $('#practiceContent').show();
+                $('.practice').hide();
+                $('.vocabulary').hide();
+            });
+        });
+    </script>
+}

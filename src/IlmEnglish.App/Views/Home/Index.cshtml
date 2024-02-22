@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Course>
+<div class="container">
+
+    @foreach (var course in Model.OrderBy(u => u.Id))
+    {
+        <div class="card" style="border: none">
+            <div class="card-header bg-primary text-white">
+                <h1>@course.Name</h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @foreach (var book in course.Books.OrderBy(u => u.Id))
+                    {
+                        <div class="col-sm-3">
+                            <div class="card shadow p-3 mb-5 bg-white rounded">
+                                <img class="card-img-top" src="@book.CoverPageUrl" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">@book.Name</h5>
+                                    <p class="card-text">@book.Description</p>
+                                    <a asp-controller="Unit" asp-action="Index" asp-route-id="@book.Id"
+                                        class="btn btn-primary mx-2">
+                                        <i class="bi bi-plus"></i> Show Units
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

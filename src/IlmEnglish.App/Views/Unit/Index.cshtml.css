@@ -1,0 +1,62 @@
+html, body {
+  height: 100%;
+}
+body {
+  background-color: #fbfbfb;
+}
+
+@media (min-width: 991.98px) {
+  main {
+    padding-left: 240px;
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  position: absolute;
+  top: 57px;
+  left: 0;
+  bottom: 61px;
+  /* padding: 58px 0 0;  */
+  /* Height of navbar */
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+  width: 400px;
+  overflow-y: auto;
+  overflow-y: hidden;
+  z-index: 600;
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+
+.sidebar .active {
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+.position-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Scrollable contents if viewport is shorter than content. */
+}
+
+/* Custom CSS for link */
+.unit-link {
+  text-decoration: none;
+  transition: box-shadow 0.3s; /* Add transition for smooth effect */
+}
+
+/* Active link style */
+.unit-link.active {
+  font-weight: bold; /* Example: Make active link bold */
+  background-color: #007bff; /* Set primary color */
+  box-shadow: none; /* Remove shadow */
+  color: white;
+}

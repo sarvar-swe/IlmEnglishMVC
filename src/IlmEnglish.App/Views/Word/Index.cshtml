@@ -1,0 +1,40 @@
+@model List<CourseBookUnitWord>
+
+<div class="card">
+    <div class="card-header">
+        <h1>Vocabulary</h1>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" class="align-middle text-center">English</th>
+                    <th scope="col" class="align-middle text-center">Uzbek</th>
+                    <th scope="col" class="align-middle text-center">Russian</th>
+                    <th scope="col" class="align-middle text-center">Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var word in Model)
+                {
+                    <tr>
+                        <td class="align-middle text-center" style="cursor: pointer;" onclick="speakWord('@word.English')">@word.English 🔊</td>
+                        <td class="align-middle text-center">@word.Uzbek</td>
+                        <td class="align-middle text-center">@word.Russian</td>
+                        <td class="align-middle text-center">
+                            <img src="@word.ImageUrl" alt="" style="width: 150px; height: 150px;">
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function speakWord(word) {
+        var synth = window.speechSynthesis;
+        var utterance = new SpeechSynthesisUtterance(word);
+        synth.speak(utterance);
+    }
+</script>

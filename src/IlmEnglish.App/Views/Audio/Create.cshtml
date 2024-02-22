@@ -1,0 +1,39 @@
+@model List<CourseBookUnit>
+
+<div class="container">
+    <form method="post" asp-action="Create" asp-controller="Audio">
+        <div class="row pt-4 pb-3">
+            <div class="col-6">
+                <select class="form-select" name="unitId" style="width: auto;">
+                    <option value="0">Select unit</option>
+                    @foreach (var unit in Model.OrderBy(u => u.UnitNumber))
+                    {
+                        <option value="@unit.Id">@unit.UnitNumber. @unit.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Name</label>
+            <input type="text" name="name" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Url</label>
+            <input type="text" name="url" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Mime Type</label>
+            <input type="text" name="mimeType" class="form-control" />
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Add</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Course" asp-action="Index" class="btn btn-secondary border form-control">
+                    Back to List
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
