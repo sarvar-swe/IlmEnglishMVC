@@ -92,7 +92,6 @@
                     success: function (data) {
                         // Update the content div with the fetched word content
                         $('#wordContent').html(data);
-                        console.log(data);
                     },
                     error: function () {
                         // Handle error if any
@@ -106,7 +105,6 @@
                     success: function (data)
                     {
                         $('#practiceContent').html(data);
-                        console.log(data);
                     },
                     error: function () {
                         console.log('Error occured while loading practice content.');
@@ -141,5 +139,6 @@
                 $('.vocabulary').hide();
             });
         });
+
     </script>
 }
