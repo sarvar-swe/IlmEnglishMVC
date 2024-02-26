@@ -41,15 +41,15 @@
             <div id="wordContent">
             </div>
 
-            <div id="practiceContent">
+            <div id="practiceContent" data-id="">
             </div>
         </div>
-
 
     </div>
 </div>
 
 @section Scripts {
+
     <script>
         // Wait for the document to be ready
         $(document).ready(function () {
@@ -100,10 +100,11 @@
                 });
 
                 $.ajax({
-                    url: '/Word/Practice/' + unitId,
+                    url: '/Practice/Index/' + unitId,
                     type: 'GET',
-                    success: function (data)
-                    {
+                    success: function (data) {
+                        var practiceContentElement = document.getElementById("practiceContent");
+                        practiceContentElement.setAttribute("data-id", unitId);
                         $('#practiceContent').html(data);
                     },
                     error: function () {
@@ -115,7 +116,7 @@
             $('#wordContent').hide();
             $('#practiceContent').hide();
 
-            $('.vocabulary').click(function() {
+            $('.vocabulary').click(function () {
                 $('#wordContent').show();
                 $('#audioContent').hide();
                 $('#practiceContent').hide();
@@ -123,7 +124,7 @@
                 $('.vocabulary').hide();
             });
 
-            $('.unit-link').click(function() {
+            $('.unit-link').click(function () {
                 $('#wordContent').hide();
                 $('#audioContent').show();
                 $('#practiceContent').hide();
@@ -131,7 +132,7 @@
                 $('.vocabulary').show();
             });
 
-            $('.practice').click(function() {
+            $('.practice').click(function () {
                 $('#wordContent').hide();
                 $('#audioContent').hide();
                 $('#practiceContent').show();

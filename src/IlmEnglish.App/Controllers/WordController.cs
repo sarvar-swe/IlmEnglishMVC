@@ -85,22 +85,4 @@ public class WordController : Controller
 
         return RedirectToAction("Create", "Word");
     }
-
-    [HttpGet]
-    public async Task<IActionResult> Practice([FromRoute] int? id, CancellationToken cancellationToken)
-    {
-        if(id == null || id == 0)
-            return NotFound();
-        
-        CourseBookUnit unit = await dbContext.CourseBookUnits
-            .Where(u => u.Id == id)
-            .Include(u => u.Vocabulary)
-            .FirstOrDefaultAsync(cancellationToken);
-        
-        if(unit == null)
-            return NotFound();
-
-        return PartialView(unit.Vocabulary.ToList());
-    }
-
 }
